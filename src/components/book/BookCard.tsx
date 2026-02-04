@@ -19,12 +19,13 @@ export function BookCard({ book, onClick }: BookCardProps) {
       onClick={onClick}
       className="group flex w-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white text-left shadow-sm transition hover:scale-[1.01] hover:shadow-md"
     >
-      <div className="relative aspect-[2/3] w-full bg-stone-100">
+      <div className="relative aspect-2/3 w-full bg-stone-100">
         {book.cover_url ? (
           <Image
             src={book.cover_url}
             alt={book.title}
             fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 100vw"
             className="object-cover"
           />
         ) : (

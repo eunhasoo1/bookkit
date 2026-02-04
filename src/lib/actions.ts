@@ -127,42 +127,7 @@ export async function getBookDetailsAction(bookId: string): Promise<string | nul
 }
 
 export async function extractCoverPaletteAction(
-  coverUrl: string
+  _coverUrl: string
 ): Promise<string[]> {
-  console.log("extractCoverPaletteAction called with:", coverUrl);
-  if (!coverUrl.trim()) {
-    console.log("Empty cover URL, skipping extraction");
-    return [];
-  }
-
-  try {
-    // 1. Fetch image manually
-    const response = await fetch(coverUrl);
-    if (!response.ok) {
-      console.error(
-        "Failed to fetch cover image:",
-        response.status,
-        response.statusText
-      );
-      return [];
-    }
-
-    const arrayBuffer = await response.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-
-    const getColors = (await import("get-image-colors")).default;
-    const palette = await getColors(buffer, "image/jpeg");
-
-    console.log(
-      "get-image-colors palette:",
-      palette.map((c) => c.hex())
-    );
-
-    const colors = palette.map((c) => c.hex().toUpperCase());
-    const unique = Array.from(new Set(colors)) as string[];
-    return unique.slice(0, 5);
-  } catch (error) {
-    console.error("Cover palette extraction error:", error);
-    return [];
-  }
+  return [];
 }

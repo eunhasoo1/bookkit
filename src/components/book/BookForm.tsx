@@ -99,7 +99,7 @@ export function BookForm({ onSubmit, onCancel }: BookFormProps) {
     >
       <div className="grid gap-4 md:grid-cols-[100px_1fr] md:gap-6">
         {/* Cover Preview */}
-        <div className="relative flex aspect-[2/3] w-full items-center justify-center overflow-hidden rounded-lg border border-stone-100 bg-stone-50 md:w-[100px]">
+        <div className="relative flex aspect-2/3 w-full items-center justify-center overflow-hidden rounded-lg border border-stone-100 bg-stone-50 md:w-[100px]">
           {isLoadingDetails && (
             <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm">
               <Loader2 className="h-5 w-5 animate-spin text-stone-500" />
@@ -119,29 +119,28 @@ export function BookForm({ onSubmit, onCancel }: BookFormProps) {
 
         <div className="grid gap-3 md:grid-cols-2">
           {/* Title Input with Autocomplete */}
-          <label
-            className="relative flex flex-col gap-1 text-sm font-medium text-stone-700"
-            ref={wrapperRef}
-          >
-            Title
-            <div className="relative">
-              <input
-                value={title}
-                onChange={(event) => {
-                  setTitle(event.target.value);
-                  setShowSuggestions(true);
-                }}
-                onFocus={() => setShowSuggestions(true)}
-                className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm text-stone-900 focus:border-stone-400 focus:outline-none"
-                placeholder="Search by title"
-                autoComplete="off"
-              />
-              {isSearching && (
-                <div className="absolute right-3 top-2.5">
-                  <Loader2 className="h-4 w-4 animate-spin text-stone-400" />
-                </div>
-              )}
-            </div>
+          <div ref={wrapperRef} className="relative">
+            <label className="flex flex-col gap-1 text-sm font-medium text-stone-700">
+              Title
+              <div className="relative">
+                <input
+                  value={title}
+                  onChange={(event) => {
+                    setTitle(event.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                  className="w-full rounded-xl border border-stone-200 px-3 py-2 text-sm text-stone-900 focus:border-stone-400 focus:outline-none"
+                  placeholder="Search by title"
+                  autoComplete="off"
+                />
+                {isSearching && (
+                  <div className="absolute right-3 top-2.5">
+                    <Loader2 className="h-4 w-4 animate-spin text-stone-400" />
+                  </div>
+                )}
+              </div>
+            </label>
             {/* Suggestions Dropdown */}
             {showSuggestions && suggestions.length > 0 && (
               <div className="absolute top-full z-10 mt-1 w-full overflow-hidden rounded-xl border border-stone-200 bg-white shadow-lg">
@@ -181,7 +180,7 @@ export function BookForm({ onSubmit, onCancel }: BookFormProps) {
                 </ul>
               </div>
             )}
-          </label>
+          </div>
 
           <label className="flex flex-col gap-1 text-sm font-medium text-stone-700">
             Author
